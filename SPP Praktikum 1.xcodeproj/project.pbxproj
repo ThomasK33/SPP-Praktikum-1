@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E96C93FA1DECC251005F2111 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E96C93F91DECC251005F2111 /* main.c */; };
+		E96C940B1DECC6D1005F2111 /* list.c in Sources */ = {isa = PBXBuildFile; fileRef = E96C940A1DECC6D1005F2111 /* list.c */; };
+		E96C940D1DECCE9B005F2111 /* file_reader.c in Sources */ = {isa = PBXBuildFile; fileRef = E96C940C1DECCE9B005F2111 /* file_reader.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,13 @@
 /* Begin PBXFileReference section */
 		E96C93F61DECC251005F2111 /* SPP Praktikum 1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "SPP Praktikum 1"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E96C93F91DECC251005F2111 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		E96C94051DECC3D4005F2111 /* dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dictionary.h; sourceTree = "<group>"; };
+		E96C94061DECC3D4005F2111 /* file_reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_reader.h; sourceTree = "<group>"; };
+		E96C94071DECC3D4005F2111 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
+		E96C94081DECC3D4005F2111 /* parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parser.h; sourceTree = "<group>"; };
+		E96C940A1DECC6D1005F2111 /* list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = list.c; sourceTree = "<group>"; };
+		E96C940C1DECCE9B005F2111 /* file_reader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = file_reader.c; sourceTree = "<group>"; };
+		E96C940F1DECCF63005F2111 /* 82-0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "82-0.txt"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +66,32 @@
 		E96C93F81DECC251005F2111 /* SPP Praktikum 1 */ = {
 			isa = PBXGroup;
 			children = (
+				E96C940E1DECCF50005F2111 /* Text Files */,
+				E96C94091DECC3DA005F2111 /* Header */,
 				E96C93F91DECC251005F2111 /* main.c */,
+				E96C940A1DECC6D1005F2111 /* list.c */,
+				E96C940C1DECCE9B005F2111 /* file_reader.c */,
 			);
 			path = "SPP Praktikum 1";
+			sourceTree = "<group>";
+		};
+		E96C94091DECC3DA005F2111 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				E96C94051DECC3D4005F2111 /* dictionary.h */,
+				E96C94061DECC3D4005F2111 /* file_reader.h */,
+				E96C94071DECC3D4005F2111 /* list.h */,
+				E96C94081DECC3D4005F2111 /* parser.h */,
+			);
+			name = Header;
+			sourceTree = "<group>";
+		};
+		E96C940E1DECCF50005F2111 /* Text Files */ = {
+			isa = PBXGroup;
+			children = (
+				E96C940F1DECCF63005F2111 /* 82-0.txt */,
+			);
+			name = "Text Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,6 +153,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E96C93FA1DECC251005F2111 /* main.c in Sources */,
+				E96C940B1DECC6D1005F2111 /* list.c in Sources */,
+				E96C940D1DECCE9B005F2111 /* file_reader.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
