@@ -39,18 +39,16 @@ void LinkedList_append( LinkedList* list, char* data )
     lln->previous = list->last;
     lln->next = NULL;
     
-    if (list->last != NULL)
-        list->last->next = lln;
+    if (list->first == NULL)
+    {
+        list->first = lln;
+        lln->previous = NULL;
+        list->last = lln;
+    }
     else
     {
-        if (list->first == NULL)
-        {
-            list->first = lln;
-        }
-        
+        list->last->next = lln;
         list->last = lln;
-        lln->previous = list->first;
-        list->first->next = lln;
     }
 }
 
@@ -61,13 +59,18 @@ void LinkedList_delete( LinkedList* list )
     {
         LinkedListNode* tmp = n->previous;
         
+        free(n->data);
+        
         free(n);
         
         n = tmp;
     }
     
     if (n != NULL)
+    {
+        free(n->data);
         free(n);
+    }
     
     free(list);
 }
