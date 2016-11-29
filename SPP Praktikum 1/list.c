@@ -100,8 +100,9 @@ char* LinkedList_getData( LinkedListNode* node )
 unsigned int LinkedList_getSize( LinkedList* list )
 {
     int i = 0;
-    
-    for (LinkedListNode* n = list->first; n->next != NULL; n = n->next)
+    LinkedListNode* n;    
+
+    for (n = list->first; n->next != NULL; n = n->next)
         i += 1;
     
     return i;
@@ -110,8 +111,9 @@ unsigned int LinkedList_getSize( LinkedList* list )
 char* LinkedList_getDataAt( LinkedList* list, unsigned int index )
 {
     LinkedListNode* n = list->first;
-    
-    for (int i = 0; i < index; i++)
+    int i;    
+
+    for (i = 0; i < index; i++)
         if (n != NULL)
             n = n->next;
     
