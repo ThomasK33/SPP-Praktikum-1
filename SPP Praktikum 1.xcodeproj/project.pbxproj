@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E925A7B41DEE081E004F1DC4 /* parser.c in Sources */ = {isa = PBXBuildFile; fileRef = E925A7B31DEE081E004F1DC4 /* parser.c */; };
 		E96C93FA1DECC251005F2111 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E96C93F91DECC251005F2111 /* main.c */; };
 		E96C940B1DECC6D1005F2111 /* list.c in Sources */ = {isa = PBXBuildFile; fileRef = E96C940A1DECC6D1005F2111 /* list.c */; };
 		E96C940D1DECCE9B005F2111 /* file_reader.c in Sources */ = {isa = PBXBuildFile; fileRef = E96C940C1DECCE9B005F2111 /* file_reader.c */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		E925A7B21DEE02B2004F1DC4 /* smaller testing.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "smaller testing.txt"; sourceTree = SOURCE_ROOT; };
+		E925A7B31DEE081E004F1DC4 /* parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parser.c; sourceTree = "<group>"; };
 		E96C93F61DECC251005F2111 /* SPP Praktikum 1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "SPP Praktikum 1"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E96C93F91DECC251005F2111 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		E96C94051DECC3D4005F2111 /* dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dictionary.h; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				E96C93F91DECC251005F2111 /* main.c */,
 				E96C940A1DECC6D1005F2111 /* list.c */,
 				E96C940C1DECCE9B005F2111 /* file_reader.c */,
+				E925A7B31DEE081E004F1DC4 /* parser.c */,
 			);
 			path = "SPP Praktikum 1";
 			sourceTree = "<group>";
@@ -156,6 +159,7 @@
 			files = (
 				E96C93FA1DECC251005F2111 /* main.c in Sources */,
 				E96C940B1DECC6D1005F2111 /* list.c in Sources */,
+				E925A7B41DEE081E004F1DC4 /* parser.c in Sources */,
 				E96C940D1DECCE9B005F2111 /* file_reader.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
