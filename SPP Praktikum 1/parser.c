@@ -32,9 +32,7 @@ void convertToUpperCase(char *sPtr)
 {
     while(*sPtr != '\0')
     {
-        if (islower(*sPtr))
-            *sPtr = toupper(*sPtr);
-        
+        *sPtr = toupper(*sPtr);
         sPtr++;
     }
 }
