@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 struct Parser {
     unsigned long int currentPosition;
@@ -27,6 +28,17 @@ Parser* Parser_create( const char* text )
     return p;
 }
 
+void convertToUpperCase(char *sPtr)
+{
+    while(*sPtr != '\0')
+    {
+        if (islower(*sPtr))
+            *sPtr = toupper(*sPtr);
+        
+        sPtr++;
+    }
+}
+
 int Parser_getNextWord( Parser* parser, char* nextWord, unsigned int bufferLength )
 {
     char buff[bufferLength];
@@ -37,11 +49,12 @@ int Parser_getNextWord( Parser* parser, char* nextWord, unsigned int bufferLengt
     if (strlen(buff) < bufferLength)
     {
         bzero(nextWord, bufferLength);
+        convertToUpperCase(buff);
         strncpy(nextWord, buff, strlen(buff));
     }
     else
     {
-        return -1;
+        return 0;
     }
     
     return i;
