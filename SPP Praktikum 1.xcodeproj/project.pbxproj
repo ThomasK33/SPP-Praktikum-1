@@ -29,6 +29,7 @@
 /* Begin PBXFileReference section */
 		E925A7B21DEE02B2004F1DC4 /* smaller testing.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "smaller testing.txt"; sourceTree = SOURCE_ROOT; };
 		E925A7B31DEE081E004F1DC4 /* parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parser.c; sourceTree = "<group>"; };
+		E92C6A211DF62C2900591C62 /* smaller testing 2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "smaller testing 2.txt"; sourceTree = SOURCE_ROOT; };
 		E94AA3821DF0ADE20006C22C /* dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dictionary.c; sourceTree = "<group>"; };
 		E96C93F61DECC251005F2111 /* SPP Praktikum 1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "SPP Praktikum 1"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E96C93F91DECC251005F2111 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
@@ -96,6 +97,7 @@
 		E96C940E1DECCF50005F2111 /* Text Files */ = {
 			isa = PBXGroup;
 			children = (
+				E92C6A211DF62C2900591C62 /* smaller testing 2.txt */,
 				E925A7B21DEE02B2004F1DC4 /* smaller testing.txt */,
 				E96C940F1DECCF63005F2111 /* 82-0.txt */,
 			);
