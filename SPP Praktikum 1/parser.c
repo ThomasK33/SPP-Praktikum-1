@@ -39,6 +39,9 @@ void convertToUpperCase(char *sPtr)
 
 int Parser_getNextWord( Parser* parser, char* nextWord, unsigned int bufferLength )
 {
+    if (parser == NULL || parser->text == NULL)
+        return -1;
+    
     char buff[bufferLength];
     
     int i = sscanf(parser->text + parser->currentPosition, "%s", buff);

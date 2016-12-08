@@ -34,18 +34,25 @@ Dictionary* Dictionary_create()
 
 void Dictionary_delete( Dictionary* dict )
 {
-    if (dict->successorCount > 0)
+    if (dict != NULL)
     {
-        for (int i = 0; i < dict->successorCount + 1; i++)
+//        printf("%s\n", dict->prefix != NULL ? dict->prefix : "");
+        if (dict->successorCount > 0)
         {
-            Dictionary_delete(dict->successors[i]);
+            for (int i = 0; i < dict->successorCount; i++)
+            {
+                Dictionary_delete(dict->successors[i]);
+            }
+            
+            free(dict->successors);
+        }
+        
+        if (dict->prefix != NULL)
+        {
+            free(dict->prefix);
+            free(dict);
         }
     }
-    
-    if (dict->prefix != NULL)
-        free(dict->prefix);
-    
-    free(dict);
 }
 
 char* commonPrefix(const char* word, const char* prefix)
@@ -64,9 +71,10 @@ char* commonPrefix(const char* word, const char* prefix)
     int i;
     for (i = 0; i < maxSize && prefix[i] == word[i]; i++);
     
-    char* subbuff = (char*) malloc(i * sizeof(char) + 1);
+    char* subbuff = (char*) malloc((i + 1) * sizeof(char));
     bzero(subbuff, sizeof(subbuff));
     memcpy(subbuff, word, i);
+    subbuff[i+1] = '\0';
     
     return subbuff;
 }
@@ -151,12 +159,15 @@ Dictionary* getLoc(Dictionary* dict, const char* word)
     for (int i = 0; i < dict->successorCount; i++) {
         Dictionary* temp = getLoc(dict->successors[i], word);
         
-        char* bprefix = commonPrefix(temp->prefix, word);
-        
-        if (strlen(bprefix) > strlen(aprefix))
+        if (temp != NULL)
         {
-            aprefix = bprefix;
-            loc = temp;
+            char* bprefix = commonPrefix(temp->prefix, word);
+            
+            if (strlen(bprefix) > strlen(aprefix))
+            {
+                aprefix = bprefix;
+                loc = temp;
+            }
         }
     }
     
@@ -194,7 +205,7 @@ void sortSucc(Dictionary* dict)
 
 void Dictionary_insert( Dictionary* dict, const char* word )
 {
-//    printf("%s - %s\n", word, dict->prefix);
+    //    printf("%s - %s\n", word, dict->prefix);
     
     if (dict->prefix == NULL && dict->successorCount == 0)
     {
@@ -266,13 +277,13 @@ void Dictionary_insert( Dictionary* dict, const char* word )
                     Dictionary_insert(loc, word);
                 }
                 else
-                {                    
+                {
                     if (strcmp(dict->prefix, prefix) != 0)
                     {
                         Dictionary* clone = cloneDictionary(dict);
-//                        printf("dict->prefix: %s - prefix: %s\n", dict->prefix, prefix);
-//                        if (loc != NULL)
-//                            printf("Loc: %s\n", loc->prefix);
+                        //                        printf("dict->prefix: %s - prefix: %s\n", dict->prefix, prefix);
+                        //                        if (loc != NULL)
+                        //                            printf("Loc: %s\n", loc->prefix);
                         dict->prefix = prefix;
                         dict->word = false;
                         dict->successors = NULL;

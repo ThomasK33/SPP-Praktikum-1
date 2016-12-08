@@ -54,6 +54,9 @@ void LinkedList_append( LinkedList* list, char* data )
 
 void LinkedList_delete( LinkedList* list )
 {
+    if (list == NULL)
+        return;
+    
     LinkedListNode* n = list->last;
     while (n != NULL && n->previous != NULL)
     {
@@ -77,27 +80,37 @@ void LinkedList_delete( LinkedList* list )
 
 LinkedListNode* LinkedList_getFirst( LinkedList* list )
 {
-    return list->first != NULL ? list->first : NULL;
+//    return list->first != NULL ? list->first : NULL;
+    if (list != NULL && list->first != NULL) return list->first;
+    else return NULL;
 }
 
 LinkedListNode* LinkedList_getLast( LinkedList* list )
 {
-    return list->last != NULL ? list->last : NULL;
+//    return list->last != NULL ? list->last : NULL;
+    if (list != NULL && list->last != NULL) return list->last;
+    else return NULL;
 }
 
 LinkedListNode* LinkedList_getNext( LinkedListNode* node )
 {
-    return node->next != NULL ? node->previous : NULL;
+//    return node != NULL ? (node->next != NULL ? node->previous : NULL) : NULL;
+    if (node != NULL && node->next != NULL) return node->next;
+    else return NULL;
 }
 
 LinkedListNode* LinkedList_getPrevious( LinkedListNode* node )
 {
-    return node->previous != NULL ? node->previous : NULL;
+//    return node->previous != NULL ? node->previous : NULL;
+    if (node != NULL && node->previous != NULL) return node->previous;
+    else return NULL;
 }
 
 char* LinkedList_getData( LinkedListNode* node )
 {
-    return node != NULL ? (node->data != NULL ? node->data : NULL) : NULL;
+//    return node != NULL ? (node->data != NULL ? node->data : NULL) : NULL;
+    if (node != NULL && node->data != NULL) return node->data;
+    else return NULL;
 }
 
 unsigned int LinkedList_getSize( LinkedList* list )
@@ -105,8 +118,12 @@ unsigned int LinkedList_getSize( LinkedList* list )
     int i = 0;
     LinkedListNode* n;    
 
-    for (n = list->first; n->next != NULL; n = n->next)
+    if (list->first != NULL)
+    {
         i += 1;
+        for (n = list->first; n->next != NULL; n = n->next)
+            i += 1;
+    }
     
     return i;
 }

@@ -4,6 +4,56 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Ex1b.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Ex1d.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>Ex1e.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Ex2a.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>Ex2b.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>Ex2c.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>Ex2d.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
+		<key>Ex3a.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
+		<key>Ex3b.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
+		<key>Ex3c.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 		<key>SPP Praktikum 1.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,7 +62,57 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>E9025C3C1DF8A65B009C9D1C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E9025C4B1DF8ADEB009C9D1C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E9025C561DF8ADFA009C9D1C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E9025C611DF8AE02009C9D1C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E9025C6C1DF8AE07009C9D1C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E90BD70F1DFA08210045FF86</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E90BD71A1DFA08270045FF86</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E90BD7251DFA082E0045FF86</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E96C93F51DECC251005F2111</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E9F9C1CF1DF8949400B00488</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E9F9C1DC1DF8984500B00488</key>
 		<dict>
 			<key>primary</key>
 			<true/>
