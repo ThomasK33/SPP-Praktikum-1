@@ -25,6 +25,8 @@ int main(int argc, const char * argv[]) {
     
     LinkedListNode* node = LinkedList_getFirst(list);
     
+    int j = 0;
+    
     do
     {
         char* data = LinkedList_getData(node);
@@ -34,12 +36,16 @@ int main(int argc, const char * argv[]) {
         while (Parser_getNextWord(p, buf, 1024) > 0)
         {
             Dictionary_insert(dict, buf);
+            
+            j += 1;
         }
         
         Parser_delete(p);
     }
     while ((node = LinkedList_getNext(node)) != NULL);
     LinkedList_delete(list);
+    
+    printf("Inserted: %i words\n", j);
     
     int i = 0;
     list = read_text_file(*(argv + 2), 16000);
@@ -54,7 +60,11 @@ int main(int argc, const char * argv[]) {
         while (Parser_getNextWord(p, buf, 1024) > 0)
         {
             if (!Dictionary_isIn(dict, buf))
+            {
                 i += 1;
+                
+//                printf("%s\n", buf);
+            }
         }
         
         Parser_delete(p);

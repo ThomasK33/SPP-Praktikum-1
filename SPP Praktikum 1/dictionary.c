@@ -7,350 +7,146 @@
 //
 
 #include "dictionary.h"
-
-#include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
+#include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
+#include <ctype.h>
 
 struct Dictionary {
-    char* prefix;
     bool word;
-    Dictionary** successors;
-    size_t successorCount;
+    struct Dictionary** children;
 };
 
-Dictionary* Dictionary_create()
-{
-    Dictionary* dict = (Dictionary*) malloc(sizeof(Dictionary));
-    
-    dict->prefix = NULL;
-    dict->word = false;
-    dict->successors = (Dictionary **) malloc(0 * sizeof(Dictionary *));;
-    dict->successorCount = 0;
-    
+void addSuffix(Dictionary* node, const char* suffix);
+int checkSuffix(const Dictionary* node, const char* suffix);
+void printNode(const Dictionary* node, char* prefix);
+void mergeNode(const Dictionary* node, Dictionary* dict, char* prefix);
+void deleteNode(Dictionary* node);
+Dictionary* createNode(bool w);
+
+Dictionary *Dictionary_create() {
+    Dictionary* dict = createNode(false);
     return dict;
 }
 
-void Dictionary_delete( Dictionary* dict )
-{
-    if (dict != NULL)
-    {
-//        printf("%s\n", dict->prefix != NULL ? dict->prefix : "");
-        if (dict->successorCount > 0)
-        {
-            for (int i = 0; i < dict->successorCount; i++)
-            {
-                Dictionary_delete(dict->successors[i]);
-            }
-            
-            free(dict->successors);
-        }
+void Dictionary_delete(Dictionary *dict) {
+    deleteNode(dict);
+}
+
+void Dictionary_insert(Dictionary *dict, const char *word) {
+    addSuffix(dict, word);
+}
+
+int Dictionary_isIn(const Dictionary *dict, const char *word) {
+    return checkSuffix(dict, word);
+}
+
+void Dictionary_print(const Dictionary *dict) {
+    char prefix[128] = "";
+    
+    printNode(dict, prefix);
+}
+
+void Dictionary_merge(Dictionary *destination, const Dictionary *source) {
+    char prefix[128] = "";
+    
+    mergeNode(source, destination, prefix);
+}
+
+void addSuffix(Dictionary* node, const char *suffix) {
+    if (!strlen(suffix)) {
+        node->word = true;
+    } else if (!isalpha(*suffix)) {
+//        printf("Adding a new suffix requires a symbol between A and Z, but got \"%c\".\n", *suffix);
+//        perror("");
         
-        if (dict->prefix != NULL)
-        {
-            free(dict->prefix);
-            free(dict);
-        }
-    }
-}
-
-char* commonPrefix(const char* word, const char* prefix)
-{
-    unsigned long int maxSize;
-    
-    if (strlen(word) > strlen(prefix))
-    {
-        maxSize = strlen(prefix);
-    }
-    else
-    {
-        maxSize = strlen(word);
-    }
-    
-    int i;
-    for (i = 0; i < maxSize && prefix[i] == word[i]; i++);
-    
-    char* subbuff = (char*) malloc((i + 1) * sizeof(char));
-    bzero(subbuff, sizeof(subbuff));
-    memcpy(subbuff, word, i);
-    subbuff[i+1] = '\0';
-    
-    return subbuff;
-}
-
-Dictionary* createNode(const char* prefix, bool word, Dictionary** suc, size_t count)
-{
-    Dictionary* dict = (Dictionary*) malloc(sizeof(Dictionary));
-    
-    char* pf = strdup(prefix);
-    
-    dict->prefix = pf;
-    dict->word = word;
-    dict->successors = suc;
-    dict->successorCount = count;
-    
-    return dict;
-}
-
-Dictionary* cloneDictionary(const Dictionary* dict)
-{
-    Dictionary* d = (Dictionary*) malloc(sizeof(Dictionary));
-    
-    d->prefix = strdup(dict->prefix);
-    d->successors = dict->successors;
-    d->successorCount = dict->successorCount;
-    d->word = dict->word;
-    
-    return d;
-}
-
-void addSuccessor (Dictionary* dict, Dictionary* node)
-{
-    if (strcmp(dict->prefix, node->prefix) == 0 && dict->word && node->word)
-    {
-        Dictionary_delete(node);
-    }
-    else
-    {
-        dict->successors = (Dictionary**) realloc(dict->successors, (dict->successorCount + 1) * sizeof(Dictionary*));
+    } else if (node->children[(int)(*suffix - (int)'A')] != NULL) {
+        addSuffix(node->children[(int)(*suffix - (int)'A')], suffix + 1);
+    } else if (strlen(suffix) == 1) {
+        Dictionary* newChild = createNode(true);
         
-        dict->successors[dict->successorCount] = node;
+        node->children[(int)(*suffix - (int)'A')] = newChild;
         
-        dict->successorCount += 1;
-    }
-}
-
-Dictionary* getLoc(Dictionary* dict, const char* word)
-{
-    if (dict == NULL)
-        return NULL;
-    
-    static Dictionary* loc;
-    static const char* lastWord = "";
-    static char* aprefix = "";
-    
-    if (strcmp(lastWord, "") == 0 || strcmp(lastWord, word) != 0)
-    {
-        aprefix = "";
-        loc = NULL;
-        lastWord = word;
-    }
-    
-    for (int i = 0; i < dict->successorCount; i++)
-    {
-        if (strcmp(dict->successors[i]->prefix, word) == 0)
-        {
-            loc = dict->successors[i];
-            break;
-        }
-        else
-        {
-            char* bprefix = commonPrefix(dict->successors[i]->prefix, word);
-            
-            if (strlen(bprefix) > strlen(aprefix))
-            {
-                aprefix = bprefix;
-                loc = dict->successors[i];
-            }
-        }
-    }
-    
-    for (int i = 0; i < dict->successorCount; i++) {
-        Dictionary* temp = getLoc(dict->successors[i], word);
+    } else {
+        Dictionary* newChild = createNode(false);
         
-        if (temp != NULL)
-        {
-            char* bprefix = commonPrefix(temp->prefix, word);
-            
-            if (strlen(bprefix) > strlen(aprefix))
-            {
-                aprefix = bprefix;
-                loc = temp;
-            }
-        }
-    }
-    
-    return loc;
-}
-
-void sortSucc(Dictionary* dict)
-{
-    if (dict == NULL)
-        return;
-    
-    if (dict->successorCount == 0)
-        return;
-    
-    for (unsigned long int j = dict->successorCount; j > 1; j--)
-    {
-        for (int i = 0; i < j - 1; i++)
-        {
-            const char* str1 = dict->successors[i]->prefix;
-            const char* str2 = dict->successors[i+1]->prefix;
-            if (strcmp(str1, str2) > 0)
-            {
-                Dictionary* temp = dict->successors[i];
-                dict->successors[i] = dict->successors[i+1];
-                dict->successors[i+1] = temp;
-            }
-        }
-    }
-    
-    for (int i = 0; i < dict->successorCount; i++)
-    {
-        sortSucc(dict->successors[i]);
-    }
-}
-
-void Dictionary_insert( Dictionary* dict, const char* word )
-{
-    //    printf("%s - %s\n", word, dict->prefix);
-    
-    if (dict->prefix == NULL && dict->successorCount == 0)
-    {
-        dict->prefix = strdup(word);
-        dict->word = true;
-    }
-    else if (strcmp(dict->prefix, word) == 0)
-    {
-        dict->word = true;
-    }
-    else
-    {
-        char* prefix = commonPrefix(dict->prefix, word);
+        node->children[(int)(*suffix - (int)'A')] = newChild;
         
-        if (strcmp(dict->prefix, "") == 0)
-        {
-            Dictionary* new = createNode(word, true, NULL, 0);
-            
-            dict->prefix = prefix;
-            dict->word = false;
-            
-            bool found = false;
-            
-            for (int i = 0; i < dict->successorCount; i++)
-            {
-                char* aprefix = commonPrefix(dict->successors[i]->prefix, word);
-                
-                if (strcmp(aprefix, "") != 0)
-                {
-                    Dictionary_insert(dict->successors[i], word);
-                    found = true;
-                }
-            }
-            
-            if (!found)
-                addSuccessor(dict, new);
-        }
-        else if (strcmp(prefix, "") == 0)
-        {
-            Dictionary* clone = cloneDictionary(dict);
-            Dictionary* new = createNode(word, true, NULL, 0);
-            
-            dict->prefix = prefix;
-            dict->word = false;
-            dict->successors = NULL;
-            dict->successorCount = 0;
-            
-            addSuccessor(dict, clone);
-            addSuccessor(dict, new);
-        }
-        else
-        {
-            if (strcmp(dict->prefix, word) == 0)
-            {
-                Dictionary* new = createNode(word, true, NULL, 0);
-                addSuccessor(dict, new);
-            }
-            else
-            {
-                Dictionary* loc = getLoc(dict, word);
-                
-                if (loc != NULL && strcmp(loc->prefix, word) == 0)
-                {
-                    addSuccessor(loc, createNode(word, true, NULL, 0));
-                }
-                
-                if (loc != NULL && loc != dict && strlen(commonPrefix(loc->prefix, word)) > strlen(commonPrefix(dict->prefix, word)))
-                {
-                    Dictionary_insert(loc, word);
-                }
-                else
-                {
-                    if (strcmp(dict->prefix, prefix) != 0)
-                    {
-                        Dictionary* clone = cloneDictionary(dict);
-                        //                        printf("dict->prefix: %s - prefix: %s\n", dict->prefix, prefix);
-                        //                        if (loc != NULL)
-                        //                            printf("Loc: %s\n", loc->prefix);
-                        dict->prefix = prefix;
-                        dict->word = false;
-                        dict->successors = NULL;
-                        dict->successorCount = 0;
-                        
-                        addSuccessor(dict, clone);
-                    }
-                    
-                    Dictionary* new = createNode(word, true, NULL, 0);
-                    addSuccessor(dict, new);
-                }
-            }
-        }
-        sortSucc(dict);
+        addSuffix(newChild, suffix + 1);
     }
 }
 
-int Dictionary_isIn( const Dictionary* dict, const char* word )
-{
-    if (dict == NULL)
+int checkSuffix(const Dictionary* node, const char* suffix) {
+    if (node == NULL)
+    {
         return 0;
-    
-    if (dict->word && strcmp(dict->prefix, word) == 0)
+    }
+    else if (!strlen(suffix)) {
         return 1;
-    
-    if (dict->successorCount == 0)
-    {
+    } else if (!isalpha(*suffix)) {
+//        printf("Checking for a valid word requires a symbol between A and Z, but got %c.", suffix[0]);
+//        perror("");
         return 0;
+    } else if (node->children[(int)(*suffix - (int)'A')] == NULL) {
+        return 0;
+    } else if (strlen(suffix) == 1) {
+        return 1;
+    } else {
+        return checkSuffix(node->children[(int)(*suffix) - (int)'A'], suffix + 1);
     }
-    
-    int found = 0;
-    
-    for (int i = 0; i < dict->successorCount; i++)
-    {
-        if (!found && Dictionary_isIn(dict->successors[i], word))
-        {
-            found = 1;
-            break;
+}
+
+void printNode(const Dictionary* node, char *prefix) {
+    for (int i = 0; i < 26; i++) {
+        if (node->children[i] != NULL) {
+            prefix[(int)strlen(prefix)] = 'A' + (char) (i);
+            
+            if (node->children[i]->word) {
+                printf("%s\n", prefix);
+            }
+            printNode(node->children[i], prefix);
+            prefix[(int)strlen(prefix) - 1] = '\0';
         }
     }
-    
-    return found;
 }
 
-void Dictionary_print( const Dictionary* dict )
-{
-    if (dict == NULL)
-        return;
-    
-    if (dict->word)
-        printf("%s\n", dict->prefix);
-    
-    for (int i = 0; i < dict->successorCount; i++) {
-        Dictionary_print(dict->successors[i]);
+void mergeNode(const Dictionary* node, Dictionary* dict, char *prefix) {
+    for (int i = 0; i < 26; i++) {
+        if (node->children[i] != NULL) {
+            prefix[(int)strlen(prefix)] = 'A' + (char) (i);
+            
+            if (node->children[i]->word) {
+                Dictionary_insert(dict, prefix);
+            }
+            
+            mergeNode(node->children[i], dict, prefix);
+            prefix[(int)strlen(prefix) - 1] = '\0';
+        }
     }
 }
 
-void Dictionary_merge( Dictionary* destination, const Dictionary* source )
+Dictionary* createNode(bool w)
 {
-    if (source == NULL)
-        return;
+    Dictionary* dict = (Dictionary*) malloc(sizeof(Dictionary));
+    dict->word = w;
+//    dict->children = (Dictionary**) calloc(26, sizeof(Dictionary*));
     
-    if (source->word)
-        Dictionary_insert(destination, source->prefix);
+    dict->children = (Dictionary**) malloc(26 * sizeof(Dictionary*));
+    bzero(dict->children, 26 * sizeof(Dictionary*));
     
-    for (int i = 0; i < source->successorCount; i++)
+    return dict;
+}
+
+void deleteNode(Dictionary* node) {
+    if (node != NULL)
     {
-        Dictionary_merge(destination, source->successors[i]);
+        for (int i = 0; i < 26; i++) {
+            if (node->children[i] != NULL) {
+                deleteNode(node->children[i]);
+            }
+        }
+        
+        free(node);
     }
 }

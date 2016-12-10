@@ -28,41 +28,41 @@ int main(int argc, const char * argv[]) {
     
     double startTime = omp_get_wtime();
     
-    #pragma omp parallel for private(i)
+    int j = 0;
+    
+    #pragma omp parallel for private(i) reduction(+:j)
     for (i = 0; i < size; i++)
     {
         char* data = LinkedList_getDataAt(list, i);
         char buf[1024];
         Parser* p = Parser_create(data);
         
-        int j = 0;
-        
         while (Parser_getNextWord(p, buf, 1024) > 0)
         {
             #pragma omp critical
             Dictionary_insert(dict, buf);
-            
+
             j += 1;
         }
         
         Parser_delete(p);
         
-        printf("%i - %i\n", omp_get_thread_num(), j);
+//        printf("%i - %i\n", omp_get_thread_num(), j);
     }
     double endTime = omp_get_wtime();
     double totalTime = endTime - startTime;
 //    double totalTime = 0;
     
     LinkedList_delete(list);
-    int j = 0;
-    printf("%i - %f\n", j, totalTime);
+    printf("Total words inserted: %d - Total time: %f\n", j, totalTime);
+//    printf("%i - %f\n", j, totalTime);
     
     /* TIMES: Total words inserted - Total time
-     -  1 Thread:   100609 - 1.041746
-     -  2 Threads:  100609 - 0.569139
-     -  4 Threads:  100609 - 0.511422
-     -  8 Threads:  100609 - 0.662391
-     -  16 Threads: 100609 - 1.323677
+     -  1 Thread:   792972 - 0.424430
+     -  2 Threads:  792972 - 0.236222
+     -  4 Threads:  792972 - 0.168236
+     -  8 Threads:  792972 - 0.256611
+     -  16 Threads: 792972 - 9.645798
      */
     
     i = 0;

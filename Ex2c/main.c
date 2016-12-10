@@ -74,16 +74,16 @@ int main(int argc, const char * argv[]) {
     LinkedList_delete(list);
     Dictionary_delete(dict);
     
-    //    printf("Amount of different words: %i - Total time: %f\n", j, totalTime);
+        printf("Amount of different words: %i - Total time: %f\n", j, totalTime);
     //    printf("Total time: %f\n", totalTime);
-    printf("%i - %f\n", j, totalTime);
+//    printf("%i - %f\n", j, totalTime);
     
     /* TIMES: Amount of different words - Total time
-     -  1 Thread:   100609 - 0.658915
-     -  2 Threads:  100609 - 0.342464
-     -  4 Threads:  100609 - 0.191040
-     -  8 Threads:  100609 - 0.161431
-     -  16 Threads: 100609 - 0.190818
+     -  1 Thread:   41034 - 0.380956
+     -  2 Threads:  41034 - 0.191767
+     -  4 Threads:  41034 - 0.099774
+     -  8 Threads:  41034 - 0.091707
+     -  16 Threads: 41034 - 0.102149
      */
     
     return 0;

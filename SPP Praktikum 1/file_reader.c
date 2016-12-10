@@ -16,10 +16,15 @@ void cleanString(char* line)
     {
         if (!isalpha(line[i]))
         {
-            line[i] = line[i+1];
-            line[i+1] = 0;
+            for (int j = i; j < strlen(line) && line[j] != 0; j++)
+            {
+                line[j] = line[j+1];
+            }
+            i -= 1;
         }
     }
+    
+    line[i] = '\0';
 }
 
 LinkedList* read_text_file( const char* filename, int blockSize )
@@ -27,8 +32,9 @@ LinkedList* read_text_file( const char* filename, int blockSize )
     LinkedList* l = LinkedList_create();
     
     FILE *fp;
-   	char buff[blockSize];
-    char sbuff[blockSize];
+   	char* buff = (char*) malloc(blockSize * sizeof(char));
+//    char sbuff[blockSize];
+    char* sbuff = (char*) malloc(blockSize * sizeof(char));
     int used = 0;
     
    	fp = fopen(filename, "r");
@@ -40,9 +46,11 @@ LinkedList* read_text_file( const char* filename, int blockSize )
     
     while((i = fscanf(fp, "%s", buff)) > 0)
     {
-        // printf("%i - %s - %lu - %d\n", i, buff, strlen(buff), used);
-        
         cleanString(buff);
+        if (strlen(buff) == 0)
+            continue;
+        
+//        printf("%s\n", buff);
         
         if (used + strlen(buff) + 1 >= blockSize)
         {
@@ -58,11 +66,21 @@ LinkedList* read_text_file( const char* filename, int blockSize )
             used = 0;
             
         }
+
+        strcat(buff, " ");
+        memmove(sbuff + used, buff, strlen(buff));
         
-        strcat(sbuff, buff);
-        strcat(sbuff, " ");
+//        strcat(sbuff, buff);
+//        strcat(sbuff, " ");
         
-        used += strlen(buff) + 1;
+//        char dest[] = "oldstring          ";
+//        const char src[]  = "newstring";
+//        
+//        printf("Before memmove dest = %s, src = %s\n", dest, src);
+//        memmove(dest, src, 9);
+//        printf("After memmove dest = %s, src = %s\n", dest, src);
+        
+        used += strlen(buff);
     }
     
     if (used > 0)
@@ -82,6 +100,9 @@ LinkedList* read_text_file( const char* filename, int blockSize )
     }
     
     fclose(fp);
+    
+    free(sbuff);
+    free(buff);
     
     return l;
 }
