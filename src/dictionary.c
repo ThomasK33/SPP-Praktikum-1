@@ -98,7 +98,8 @@ int checkSuffix(const Dictionary* node, const char* suffix) {
 }
 
 void printNode(const Dictionary* node, char *prefix) {
-    for (int i = 0; i < 26; i++) {
+    int i;
+    for (i = 0; i < 26; i++) {
         if (node->children[i] != NULL) {
             prefix[(int)strlen(prefix)] = 'A' + (char) (i);
             
@@ -112,7 +113,8 @@ void printNode(const Dictionary* node, char *prefix) {
 }
 
 void mergeNode(const Dictionary* node, Dictionary* dict, char *prefix) {
-    for (int i = 0; i < 26; i++) {
+    int i;
+    for (i = 0; i < 26; i++) {
         if (node->children[i] != NULL) {
             prefix[(int)strlen(prefix)] = 'A' + (char) (i);
             
@@ -141,7 +143,8 @@ Dictionary* createNode(bool w)
 void deleteNode(Dictionary* node) {
     if (node != NULL)
     {
-        for (int i = 0; i < 26; i++) {
+	int i;
+        for (i = 0; i < 26; i++) {
             if (node->children[i] != NULL) {
                 deleteNode(node->children[i]);
             }

@@ -16,7 +16,8 @@ void cleanString(char* line)
     {
         if (!isalpha(line[i]))
         {
-            for (int j = i; j < strlen(line) && line[j] != 0; j++)
+		int j;
+            for (j = i; j < strlen(line) && line[j] != 0; j++)
             {
                 line[j] = line[j+1];
             }

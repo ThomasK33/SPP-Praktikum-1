@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 
-#include <libiomp/omp.h>
+#include <omp.h>
 
 // #include <omp.h>
 

@@ -31,8 +31,8 @@ TASKS = Ex2a Ex2b Ex2c Ex2d Ex3a Ex3b Ex3c
 
 first: mkdir $(STTASKS) $(MPTASKS) $(BASE)
 	for i in $(STNAMES); do gcc -std=c11 $(addsuffix .s.o, $(addprefix $(BUILDDIR), $$i)) $(addprefix $(BUILDDIR), $(BASE)) -o $(addprefix $(BIN), $$i); done
-	# for i in $(MPNAMES); do gcc -fopenmp -std=c11 $(addsuffix .mp.o, $(addprefix $(BUILDDIR), $$i)) $(addprefix $(BUILDDIR), $(BASE)) -o $(addprefix $(BIN), $$i); done
-	for i in $(MPNAMES); do clang-omp -fopenmp -std=c11 $(addsuffix .mp.o, $(addprefix $(BUILDDIR), $$i)) $(addprefix $(BUILDDIR), $(BASE)) -o $(addprefix $(BIN), $$i); done
+	for i in $(MPNAMES); do gcc -fopenmp -std=c11 $(addsuffix .mp.o, $(addprefix $(BUILDDIR), $$i)) $(addprefix $(BUILDDIR), $(BASE)) -o $(addprefix $(BIN), $$i); done
+#	for i in $(MPNAMES); do clang-omp -fopenmp -std=c11 $(addsuffix .mp.o, $(addprefix $(BUILDDIR), $$i)) $(addprefix $(BUILDDIR), $(BASE)) -o $(addprefix $(BIN), $$i); done
 
 %.o: $(SRCDIR)/%.c
 	gcc -c $< -o $(addprefix $(BUILDDIR), $@)
@@ -41,8 +41,8 @@ first: mkdir $(STTASKS) $(MPTASKS) $(BASE)
 	gcc -c $< -o $(addprefix $(BUILDDIR), $@) -I$(SRCDIR)
 
 %.mp.o: %/main.c
-	clang-omp -c $< -o $(addprefix $(BUILDDIR), $@) -I$(SRCDIR) -fopenmp
-	# gcc -c $< -o $(addprefix $(BUILDDIR), $@) -I$(SRCDIR) -fopenmp
+#	clang-omp -c $< -o $(addprefix $(BUILDDIR), $@) -I$(SRCDIR) -fopenmp
+	gcc -c $< -o $(addprefix $(BUILDDIR), $@) -I$(SRCDIR) -fopenmp
 
 mkdir:
 	mkdir -p $(BUILDDIR)
