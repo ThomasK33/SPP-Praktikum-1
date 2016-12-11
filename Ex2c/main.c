@@ -9,6 +9,7 @@
 #include <stdio.h>
 
 #include <libiomp/omp.h>
+// #include <omp.h>
 
 #include "file_reader.h"
 #include "parser.h"

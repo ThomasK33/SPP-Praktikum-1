@@ -10,6 +10,8 @@
 
 #include <libiomp/omp.h>
 
+// #include <omp.h>
+
 #include "file_reader.h"
 #include "parser.h"
 #include "dictionary.h"
