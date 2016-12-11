@@ -197,7 +197,6 @@
 		E9E264441DFCBA420035C2C0 /* file_reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_reader.h; sourceTree = "<group>"; };
 		E9E264451DFCBA420035C2C0 /* list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = list.c; sourceTree = "<group>"; };
 		E9E264461DFCBA420035C2C0 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
-		E9E264471DFCBA420035C2C0 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		E9E264481DFCBA420035C2C0 /* parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parser.c; sourceTree = "<group>"; };
 		E9E264491DFCBA420035C2C0 /* parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parser.h; sourceTree = "<group>"; };
 		E9E2644F1DFCBA9C0035C2C0 /* 82-0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "82-0.txt"; sourceTree = SOURCE_ROOT; };
@@ -415,7 +414,6 @@
 				E9E264411DFCBA420035C2C0 /* dictionary.c */,
 				E9E264431DFCBA420035C2C0 /* file_reader.c */,
 				E9E264451DFCBA420035C2C0 /* list.c */,
-				E9E264471DFCBA420035C2C0 /* main.c */,
 				E9E264481DFCBA420035C2C0 /* parser.c */,
 			);
 			path = src;
@@ -980,7 +978,7 @@
 		E90BD7201DFA08270045FF86 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				DEVELOPMENT_TEAM = 22V3QSD3G5;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -990,7 +988,7 @@
 		E90BD7211DFA08270045FF86 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				DEVELOPMENT_TEAM = 22V3QSD3G5;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1000,7 +998,7 @@
 		E90BD72B1DFA082E0045FF86 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				DEVELOPMENT_TEAM = 22V3QSD3G5;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1010,7 +1008,7 @@
 		E90BD72C1DFA082E0045FF86 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				DEVELOPMENT_TEAM = 22V3QSD3G5;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				PRODUCT_NAME = "$(TARGET_NAME)";
