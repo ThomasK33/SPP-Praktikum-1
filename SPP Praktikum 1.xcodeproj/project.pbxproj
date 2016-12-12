@@ -199,10 +199,6 @@
 		E9E264461DFCBA420035C2C0 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		E9E264481DFCBA420035C2C0 /* parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parser.c; sourceTree = "<group>"; };
 		E9E264491DFCBA420035C2C0 /* parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parser.h; sourceTree = "<group>"; };
-		E9E2644F1DFCBA9C0035C2C0 /* 82-0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "82-0.txt"; sourceTree = SOURCE_ROOT; };
-		E9E264501DFCBA9C0035C2C0 /* pg30.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pg30.txt; sourceTree = SOURCE_ROOT; };
-		E9E264511DFCBA9C0035C2C0 /* smaller testing 2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "smaller testing 2.txt"; sourceTree = SOURCE_ROOT; };
-		E9E264521DFCBA9C0035C2C0 /* smaller testing.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "smaller testing.txt"; sourceTree = SOURCE_ROOT; };
 		E9F9C1D01DF8949400B00488 /* Ex1b */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Ex1b; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9F9C1D21DF8949400B00488 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		E9F9C1DD1DF8984500B00488 /* Ex1d */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Ex1d; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -422,10 +418,6 @@
 		E9E264531DFCBAA00035C2C0 /* Text files */ = {
 			isa = PBXGroup;
 			children = (
-				E9E2644F1DFCBA9C0035C2C0 /* 82-0.txt */,
-				E9E264501DFCBA9C0035C2C0 /* pg30.txt */,
-				E9E264511DFCBA9C0035C2C0 /* smaller testing 2.txt */,
-				E9E264521DFCBA9C0035C2C0 /* smaller testing.txt */,
 			);
 			name = "Text files";
 			sourceTree = "<group>";
